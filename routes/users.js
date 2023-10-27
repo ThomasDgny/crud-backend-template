@@ -5,7 +5,6 @@ import { v4 as uuidv4 } from "uuid";
 const router = express.Router();
 
 router.get("/", (req, res) => {
-  console.log(users);
   res.send(users);
 });
 
@@ -18,8 +17,21 @@ router.post("/", (req, res) => {
 router.get("/:id", (req, res) => {
   const paramID = req.params.id;
   const getUser = users.find((user) => user.id === paramID);
-  console.log(getUser)
-  res.send(getUser);
+  if (getUser) {
+    return res.send(getUser);
+  } else {
+    throw new Error("User could not found");
+  }
+});
+
+router.delete("/:id", (req, res) => {
+  const paramID = req.params.id;
+  const getUser = users.filter((user) => user.id !== paramID);
+  if (getUser) {
+    return res.send(getUser);
+  } else {
+    throw new Error("User could not found");
+  }
 });
 
 export default router;
