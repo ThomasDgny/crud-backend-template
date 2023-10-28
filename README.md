@@ -49,6 +49,20 @@ Below are the available API endpoints for this CRUD API:
     "age": 23
 }
 ````
+### Example Response from Creating a User
+```json
+{
+    "message": "user jhon added to database",
+    "status": 200,
+    "data": {
+        "new": {
+            "username": "jhon",
+            "email": "jhon@example.com",
+            "age": 23
+        }
+    }
+}
+````
 <br>
 For testing, you can use tools like Postman. The API responses are not shown in this README, but you can test them in your development environment.
 Make sure to replace the URL examples with the actual URL where your API is hosted.
