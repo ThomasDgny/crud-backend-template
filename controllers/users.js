@@ -1,5 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
 import { users as db } from "../db/mock-users.js";
+import { responseMessage } from "../utils/response-message.js";
 let users = [...db];
 
 export function getAllUsers(req, res) {
@@ -10,9 +11,11 @@ export function createUser(req, res) {
   try {
     const newUserBody = req.body;
     if (!newUserBody.username || !newUserBody.email || !newUserBody.age) {
-      return res.status(400).send({
-        message: "Send all required fields: name, email, age",
-      });
+      return responseMessage(
+        res,
+        404,
+        "Send all required fields: name, email, age"
+      );
     }
 
     const newUser = {
@@ -22,10 +25,14 @@ export function createUser(req, res) {
     };
 
     users.push({ ...newUser, id: uuidv4() });
-    res.send(`user ${newUser.username} added to database`);
+    return responseMessage(
+      res,
+      200,
+      `user ${newUser.username} added to database`,
+      newUser
+    );
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
+    return responseMessage(res, 500, error.message);
   }
 }
 
@@ -34,14 +41,11 @@ export function getUser(req, res) {
     const paramID = req.params.id;
     const getUser = users.find((user) => user.id === paramID);
     if (!getUser) {
-      return res.status(400).send({
-        message: "User not found",
-      });
+      return responseMessage(res, 404, "User not found");
     }
-    return res.send(getUser);
+    return responseMessage(res, 200, `user found`, getUser);
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
+    return responseMessage(res, 500, error.message);
   }
 }
 
@@ -50,15 +54,12 @@ export function deleteUser(req, res) {
     const paramID = req.params.id;
     const getUser = users.find((user) => user.id === paramID);
     if (!getUser) {
-      return res.status(400).send({
-        message: "User not found",
-      });
+      return responseMessage(res, 404, "User not found");
     }
     users = users.filter((user) => user.id !== getUser.id);
-    return res.send(`user ${paramID} removed from database`);
+    return responseMessage(res, 200, `user ${paramID} removed from database`);
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
+    return responseMessage(res, 500, error.message);
   }
 }
 
@@ -67,26 +68,29 @@ export function updateUser(req, res) {
     const paramID = req.params.id;
     const user = users.find((user) => user.id === paramID);
     if (!user) {
-      return res.status(404).send({
-        message: "User not found",
-      });
+      return responseMessage(res, 404, "User not found");
     }
-
     const { username, email, age } = req.body;
 
     if (!username || !email || !age) {
-      return res.status(400).send({
-        message: "Send all required fields: username, email, age",
-      });
+      return responseMessage(
+        res,
+        404,
+        "Send all required fields: name, email, age"
+      );
     }
-
-    user.username = username;
-    user.email = email;
-    user.age = age;
-
-    return res.send(`User with ID ${paramID} updated`);
+    const newUser = {
+      username: (user.username = username),
+      email: (user.email = email),
+      age: (user.age = age),
+    };
+    return responseMessage(
+      res,
+      200,
+      `User with ID ${paramID} updated`,
+      newUser
+    );
   } catch (error) {
-    console.log(error.message);
-    res.status(500).send({ message: error.message });
+    return responseMessage(res, 500, error.message);
   }
 }
