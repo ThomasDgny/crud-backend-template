@@ -35,7 +35,7 @@ Below are the available API endpoints for this CRUD API:
 | Endpoint             | Method | Description                 | Example Request                                        |
 | --------------------  | ------ | ---------------------------- | ------------------------------------------------------ |
 | `/users`             | GET    | Get all users               | [View](http://localhost:5000/users)                    |
-| `/users/:id`         | GET    | Get a user by ID            | [View](http://localhost:5000/users/3)        |
+| `/users/:id`         | GET    | Get a user by ID            | [View](http://localhost:5000/users/3)                  |
 | `/users/:id`         | DELETE | Delete a user by ID         | [View](http://localhost:5000/users/8)                  |
 | `/users`             | POST   | Create a new user           | [View](http://localhost:5000/users)                    |
 | `/users/:id`         | PATCH  | Update a user by ID         | [View](http://localhost:5000/users/3)                  |
@@ -48,5 +48,8 @@ Below are the available API endpoints for this CRUD API:
     "email": "jhon@example.com",
     "age": 23
 }
-
-
+````
+<br>
+For testing, you can use tools like Postman. The API responses are not shown in this README, but you can test them in your development environment.
+Make sure to replace the URL examples with the actual URL where your API is hosted.
+Feel free to customize this table format and add more details as needed for your project's specific requirements.
