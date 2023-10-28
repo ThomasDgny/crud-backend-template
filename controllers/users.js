@@ -1,6 +1,6 @@
 import { v4 as uuidv4 } from "uuid";
-
-let users = [];
+import { users as db } from "../db/mock-users.js";
+let users = [...db];
 
 export function getAllUsers(req, res) {
   res.send(users);
@@ -73,7 +73,7 @@ export function updateUser(req, res) {
     }
 
     const { username, email, age } = req.body;
-    
+
     if (!username || !email || !age) {
       return res.status(400).send({
         message: "Send all required fields: username, email, age",
@@ -83,7 +83,7 @@ export function updateUser(req, res) {
     user.username = username;
     user.email = email;
     user.age = age;
-    
+
     return res.send(`User with ID ${paramID} updated`);
   } catch (error) {
     console.log(error.message);
