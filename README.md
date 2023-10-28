@@ -27,3 +27,26 @@ cd express-crud-api-template
 npm install
  ```
 
+
+## API Endpoints
+
+Below are the available API endpoints for this CRUD API:
+
+| Endpoint             | Method | Description                 | Example Request                                        |
+| --------------------  | ------ | ---------------------------- | ------------------------------------------------------ |
+| `/users`             | GET    | Get all users               | [View](http://localhost:5000/users)                    |
+| `/users/:id`         | GET    | Get a user by ID            | [View](http://localhost:5000/users/5776786867)        |
+| `/users/:id`         | DELETE | Delete a user by ID         | [View](http://localhost:5000/users/8)                  |
+| `/users`             | POST   | Create a new user           | [View](http://localhost:5000/users)                    |
+| `/users/:id`         | PATCH  | Update a user by ID         | [View](http://localhost:5000/users/3)                  |
+
+### Example Request Body for Creating a User
+
+```json
+{
+    "username": null,
+    "email": "taric@example.com",
+    "age": 23
+}
+
+
