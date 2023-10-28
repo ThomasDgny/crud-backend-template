@@ -44,8 +44,8 @@ Below are the available API endpoints for this CRUD API:
 
 ```json
 {
-    "username": null,
-    "email": "taric@example.com",
+    "username": "jhon",
+    "email": "jhon@example.com",
     "age": 23
 }
 
