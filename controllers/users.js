@@ -10,12 +10,17 @@ export function getAllUsers(req, res) {
 export function createUser(req, res) {
   try {
     const newUserBody = req.body;
+    const isUserExist = users.find((user) => user.email === newUserBody.email);
     if (!newUserBody.username || !newUserBody.email || !newUserBody.age) {
       return responseMessage(
         res,
         404,
         "Send all required fields: name, email, age"
       );
+    }
+
+    if (isUserExist) {
+      return responseMessage(res, 400, "User already exist");
     }
 
     const newUser = {
