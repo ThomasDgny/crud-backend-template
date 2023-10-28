@@ -32,13 +32,13 @@ npm install
 
 Below are the available API endpoints for this CRUD API:
 
-| Endpoint             | Method | Description                 | Example Request                                        |
-| --------------------  | ------ | ---------------------------- | ------------------------------------------------------ |
-| `/users`             | GET    | Get all users               | [View](http://localhost:5000/users)                    |
-| `/users/:id`         | GET    | Get a user by ID            | [View](http://localhost:5000/users/3)                  |
-| `/users/:id`         | DELETE | Delete a user by ID         | [View](http://localhost:5000/users/8)                  |
-| `/users`             | POST   | Create a new user           | [View](http://localhost:5000/users)                    |
-| `/users/:id`         | PATCH  | Update a user by ID         | [View](http://localhost:5000/users/3)                  |
+| Endpoint             | Method | Description                 | 
+| --------------------  | ------ | ---------------------------- | 
+| `/users`             | GET    | Get all users               | 
+| `/users/:id`         | GET    | Get a user by ID            |
+| `/users/:id`         | DELETE | Delete a user by ID         | 
+| `/users`             | POST   | Create a new user           | 
+| `/users/:id`         | PATCH  | Update a user by ID         | 
 
 ### Example Request Body for Creating a User
 
