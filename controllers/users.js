@@ -29,7 +29,9 @@ export function createUser(req, res) {
       res,
       200,
       `user ${newUser.username} added to database`,
-      newUser
+      {
+        new: newUser,
+      }
     );
   } catch (error) {
     return responseMessage(res, 500, error.message);
@@ -43,7 +45,9 @@ export function getUser(req, res) {
     if (!getUser) {
       return responseMessage(res, 404, "User not found");
     }
-    return responseMessage(res, 200, `user found`, getUser);
+    return responseMessage(res, 200, `user found`, {
+      user: getUser,
+    });
   } catch (error) {
     return responseMessage(res, 500, error.message);
   }
@@ -57,7 +61,9 @@ export function deleteUser(req, res) {
       return responseMessage(res, 404, "User not found");
     }
     users = users.filter((user) => user.id !== getUser.id);
-    return responseMessage(res, 200, `user ${paramID} removed from database`);
+    return responseMessage(res, 200, `user ${paramID} removed from database`, {
+      removed: getUser,
+    });
   } catch (error) {
     return responseMessage(res, 500, error.message);
   }
@@ -67,11 +73,10 @@ export function updateUser(req, res) {
   try {
     const paramID = req.params.id;
     const user = users.find((user) => user.id === paramID);
+    const { username, email, age } = req.body;
     if (!user) {
       return responseMessage(res, 404, "User not found");
     }
-    const { username, email, age } = req.body;
-
     if (!username || !email || !age) {
       return responseMessage(
         res,
@@ -84,12 +89,9 @@ export function updateUser(req, res) {
       email: (user.email = email),
       age: (user.age = age),
     };
-    return responseMessage(
-      res,
-      200,
-      `User with ID ${paramID} updated`,
-      newUser
-    );
+    return responseMessage(res, 200, `User with ID ${paramID} updated`, {
+      updated: newUser,
+    });
   } catch (error) {
     return responseMessage(res, 500, error.message);
   }
