@@ -69,5 +69,6 @@ Make sure to replace the URL examples with the actual URL where your API is host
 Feel free to customize this table format and add more details as needed for your project's specific requirements.
 
 <br>
-## License
+
+### License
 This repo is cretaed under the [MIT License](https://opensource.org/licenses/MIT).
